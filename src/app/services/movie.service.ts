@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
-import { Observable, catchError, tap } from 'rxjs';
-import { Movie, TMDBResponse } from '../models/movie.model';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable, signal} from '@angular/core';
+import {catchError, Observable, tap} from 'rxjs';
+import {Movie, TMDBResponse} from '../models/movie.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class MovieService {
 
   private readonly imageBaseUrl = 'https://image.tmdb.org/t/p/';
 
-  // Создаем сигналы для хранения состояния
+
   movies = signal<Movie[]>([]);
   searchResults = signal<Movie[]>([]);
   isLoading = signal<boolean>(false);
@@ -22,7 +22,8 @@ export class MovieService {
   currentPage = signal<number>(1);
   isLoadingMore = signal<boolean>(false);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   fetchPopularMovies(page: number = 1): void {
     this.isLoading.set(true);
@@ -34,17 +35,18 @@ export class MovieService {
       'Content-Type': 'application/json'
     });
 
-    this.http.get<TMDBResponse>(`${this.apiUrl}/movie/popular?page=${page}`, { headers })
+    this.http.get<TMDBResponse>(`${this.apiUrl}/movie/popular?page=${page}`, {headers})
       .pipe(
         tap(response => {
           this.movies.set(response.results);
           this.isLoading.set(false);
-        }),
-        catchError(err => {
-          console.error('Ошибка при загрузке фильмов:', err);
-          this.error.set('Не удалось загрузить фильмы. Пожалуйста, попробуйте позже.');
+        }), catchError(err => {
+          console.error('Error loading movies:', err);
+          this.error.set('Failed to load movies. Please try again later.');
           this.isLoading.set(false);
-          throw err;
+          return new Observable<never>(observer => {
+            observer.error(err);
+          });
         })
       )
       .subscribe();
@@ -59,20 +61,20 @@ export class MovieService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.get<TMDBResponse>(`${this.apiUrl}/movie/popular?page=${nextPage}`, { headers })
+    return this.http.get<TMDBResponse>(`${this.apiUrl}/movie/popular?page=${nextPage}`, {headers})
       .pipe(
         tap(response => {
-          // Добавляем новые фильмы к существующим
           const currentMovies = this.movies();
           this.movies.set([...currentMovies, ...response.results]);
           this.currentPage.set(nextPage);
           this.isLoadingMore.set(false);
-        }),
-        catchError(err => {
-          console.error('Ошибка при загрузке дополнительных фильмов:', err);
-          this.error.set('Не удалось загрузить дополнительные фильмы. Пожалуйста, попробуйте позже.');
+        }), catchError(err => {
+          console.error('Error loading more movies:', err);
+          this.error.set('Failed to load more movies. Please try again later.');
           this.isLoadingMore.set(false);
-          throw err;
+          return new Observable<never>(observer => {
+            observer.error(err);
+          });
         })
       );
   }
@@ -91,17 +93,18 @@ export class MovieService {
       'Content-Type': 'application/json'
     });
 
-    this.http.get<TMDBResponse>(`${this.apiUrl}/search/movie?query=${encodeURIComponent(query)}`, { headers })
+    this.http.get<TMDBResponse>(`${this.apiUrl}/search/movie?query=${encodeURIComponent(query)}`, {headers})
       .pipe(
         tap(response => {
           this.searchResults.set(response.results);
           this.isSearching.set(false);
-        }),
-        catchError(err => {
-          console.error('Ошибка при поиске фильмов:', err);
-          this.error.set('Не удалось найти фильмы. Пожалуйста, попробуйте позже.');
+        }), catchError(err => {
+          console.error('Error searching for movies:', err);
+          this.error.set('Failed to find movies. Please try again later.');
           this.isSearching.set(false);
-          throw err;
+          return new Observable<never>(observer => {
+            observer.error(err);
+          });
         })
       )
       .subscribe();
@@ -114,7 +117,7 @@ export class MovieService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.get<Movie>(`${this.apiUrl}/movie/${id}`, { headers });
+    return this.http.get<Movie>(`${this.apiUrl}/movie/${id}`, {headers});
   }
 
   getImageUrl(path: string, size: string = 'w500'): string {
