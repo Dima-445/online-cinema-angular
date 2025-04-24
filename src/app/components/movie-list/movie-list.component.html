@@ -1,0 +1,60 @@
+<div class="movie-carousel-container">
+  <div class="wrapper">
+    <h2 class="title">Popular Movies</h2>
+    <div class="carousel-container" [class.carousel-initialized]="carouselVisible">
+      <swiper-container #swiper class="movie-carousel">
+        <swiper-slide *ngFor="let movie of movies" class="movie-slide">
+          <app-movie [movie]="movie"></app-movie>
+        </swiper-slide>
+        <swiper-slide class="movie-slide load-more-slide">
+          <div class="load-more-container" (click)="loadMoreMovies()">
+            <div class="load-more-content" *ngIf="!isLoadingMore">
+              <div class="load-more-icon">+</div>
+              <div class="load-more-text">Load More</div>
+            </div>
+            <div class="loading-spinner" *ngIf="isLoadingMore">
+              <div class="spinner"></div>
+              <div>Loading...</div>
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <div class="wrapper search">
+      <h2 class="title">Search Movies</h2>
+      <div class="search-form">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          placeholder="Enter movie title..."
+          class="search-input"
+          (input)="onSearchInput(searchQuery)"
+        >
+      </div>
+
+      <div *ngIf="isSearching" class="loading">
+        <p>Loading results...</p>
+      </div>
+
+      <div *ngIf="error" class="error-message">
+        <p>{{ error }}</p>
+      </div>
+
+      <div *ngIf="!isSearching && searchResults.length === 0 && searchQuery" class="no-results">
+        <p>No results found for your search</p>
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="searchResults.length > 0 && searchQuery" class="wrapper">
+    <h2 class="title">Search Results</h2>
+    <div class="movie-grid">
+      <div *ngFor="let movie of searchResults" class="movie-item">
+        <app-movie [movie]="movie"></app-movie>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="movie-card">
+  <a class="movie-banner" [routerLink]="['/movie', movie.id]">
+    <img [src]="getPosterUrl(movie.poster_path)" [alt]="movie.title" class="movie-image"/>
+    <div class="movie-rating">{{ formatRating(movie.vote_average) }}</div>
+  </a>
+  <h3 class="movie-title">{{ movie.title }}</h3>
+</div>
