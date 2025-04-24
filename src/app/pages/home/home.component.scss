@@ -1,0 +1,99 @@
+.home-container {
+  position: relative;
+  padding: 1.5rem 0;
+
+  .main-title {
+    font-family: Poppins, sans-serif;
+    font-size: 130px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 119px;
+    color: #FF3F2E;
+
+    span {
+      color: #FFF;
+    }
+
+    @media (max-width: 1024px) {
+      font-size: 80px;
+      line-height: normal;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 60px;
+      line-height: normal;
+
+    }
+    @media (max-width: 576px) {
+      font-size: 2rem;
+    }
+  }
+}
+
+
+.movies-section {
+  z-index: 2;
+  position: relative;
+  padding: 0 2.5rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1.25rem;
+  }
+}
+
+.home-container:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
+  height: 100%;
+  background-image: radial-gradient(rgb(73, 73, 78) 1.5px, transparent 1.5px);
+  background-size: 2rem 2rem;
+  z-index: 0;
+}
+
+.background-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(3px);
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+  z-index: 1;
+  overflow: hidden;
+  min-height: 100vh;
+
+  &::before {
+    content: "";
+    position: absolute;
+    max-width: 964px;
+    aspect-ratio: 1;
+    width: 100%;
+    border-radius: 964px;
+    background: red;
+    filter: blur(250px);
+    z-index: -10;
+    top: 900px;
+    left: 0;
+    transform: translate(-40%, 0);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    max-width: 271px;
+    aspect-ratio: 1;
+    width: 100%;
+    border-radius: 964px;
+    background: blue;
+    filter: blur(120px);
+    z-index: -10;
+    top: 500px;
+    right: 0;
+    transform: translate(60%, 0);
+  }
+}

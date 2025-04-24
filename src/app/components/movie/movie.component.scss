@@ -1,0 +1,43 @@
+.movie-card {
+  @apply relative w-full overflow-hidden rounded-lg transition-transform duration-300;
+
+  &:hover {
+    .movie-banner {
+      .movie-image {
+        @apply scale-110;
+      }
+    }
+  }
+}
+
+.movie-banner {
+  @apply relative overflow-hidden rounded-lg aspect-[2/3] flex;
+
+  img {
+    @apply w-full h-full object-cover transition-transform;
+  }
+}
+
+.movie-rating {
+  @apply absolute top-[10px] right-[10px] bg-black/70 text-[#ffca28] p-1 px-2 rounded font-bold text-sm;
+}
+
+.movie-title {
+  @apply mt-[10px] text-base font-medium text-white whitespace-nowrap overflow-hidden text-ellipsis;
+}
+
+@media (max-width: 1024px) {
+  .movie-title {
+    @apply text-sm;
+  }
+
+  .movie-rating {
+    @apply text-xs p-[3px] px-[6px];
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-title {
+    @apply text-xs;
+  }
+}
