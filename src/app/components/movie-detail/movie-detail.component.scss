@@ -1,131 +1,92 @@
 .movie-detail-container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 1rem 1.25rem;
-  color: #fff;
+  @apply max-w-[1200px] mx-auto p-4 text-white;
 }
 
 .back-button {
-  margin-bottom: 1.5rem;
+  @apply mb-6;
 
   a {
-    display: inline-block;
-    color: #ccc;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+    @apply inline-block text-[#ccc] no-underline p-2 px-4 rounded text-base transition-all duration-300;
 
     &:hover {
-      color: #fff;
-      background-color: rgba(255, 255, 255, 0.1);
+      @apply text-white bg-white/10;
     }
   }
 }
 
 .loading, .error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 300px;
-  font-size: 1.2rem;
+  @apply flex justify-center items-center min-h-[300px] text-lg;
 }
 
 .error {
-  color: #ff6b6b;
+  @apply text-[#ff6b6b];
 }
 
 .movie-header {
-  margin-bottom: 2rem;
+  @apply mb-8;
 
   h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    @apply text-4xl mb-2;
   }
 
   .movie-meta {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    color: #aaa;
+    @apply flex items-center gap-4 text-[#aaa];
 
     .rating {
-      background-color: rgba(255, 196, 0, 0.8);
-      color: #000;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-weight: bold;
+      @apply bg-[rgba(255,196,0,0.8)] text-black py-0.5 px-2 rounded font-bold;
     }
   }
 }
 
 .movie-content {
-  display: flex;
-  gap: 2rem;
+  @apply flex gap-8;
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    @apply flex-col;
   }
 }
 
 .poster-container {
-  flex: 0 0 300px;
+  @apply flex-none w-[300px];
 
   .poster {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    @apply w-full h-auto rounded-lg shadow-lg;
   }
 
   @media (max-width: 768px) {
-    flex: 0 0 auto;
-    max-width: 300px;
-    margin: 0 auto;
+    @apply flex-none max-w-[300px] mx-auto;
   }
 }
 
 .movie-details {
-  flex: 1;
+  @apply flex-1;
 
   .tagline {
-    font-style: italic;
-    color: #bbb;
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
+    @apply italic text-[#bbb] mb-6 text-lg;
   }
 
   .overview {
-    margin-bottom: 2rem;
+    @apply mb-8;
 
     h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: #eee;
+      @apply text-2xl mb-2 text-[#eee];
     }
 
     p {
-      line-height: 1.6;
-      color: #ddd;
+      @apply leading-relaxed text-[#ddd];
     }
   }
 
   .additional-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
+    @apply grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6;
 
     .info-item {
       h3 {
-        font-size: 1rem;
-        color: #aaa;
-        margin-bottom: 0.5rem;
+        @apply text-base text-[#aaa] mb-2;
       }
 
       p {
-        font-size: 1.1rem;
-        color: #fff;
+        @apply text-lg text-white;
       }
     }
   }

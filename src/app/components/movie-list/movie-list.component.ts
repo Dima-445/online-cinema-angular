@@ -35,6 +35,7 @@ export class MovieListComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.movieService.movies();
   }
 
+
   get searchResults() {
     return this.movieService.searchResults();
   }
