@@ -1,0 +1,61 @@
+<div class="movie-detail-container">
+  <div class="back-button">
+    <a [routerLink]="['/']">← Back to movies</a>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading movie information...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>An error occurred while loading the movie. Please try again later.</p>
+  </div>
+
+  <div *ngIf="!loading && !error && movie" class="movie-info">
+    <div class="movie-header">
+      <h1>{{ movie.title }}</h1>
+      <div class="movie-meta">
+        <span class="release-date" *ngIf="movie.release_date">{{ movie.release_date | date:'yyyy' }}</span>
+        <span class="rating">{{ movie.vote_average | number:'1.1-1' }}</span>
+      </div>
+    </div>
+
+    <div class="movie-content">
+      <div class="poster-container">
+        <img [src]="getPosterUrl(movie.poster_path)" [alt]="movie.title" class="poster">
+      </div>
+
+      <div class="movie-details">
+        <div class="tagline" *ngIf="movie.tagline">
+          <p>{{ movie.tagline }}</p>
+        </div>
+        <div class="overview">
+          <h2>Overview</h2>
+          <p>{{ movie.overview }}</p>
+        </div>
+
+        <div class="additional-info">
+          <div class="info-item" *ngIf="movie.genres && movie.genres.length">
+            <h3>Genres</h3>
+            <p>{{ getGenresList(movie.genres) }}</p>
+          </div>
+
+          <div class="info-item" *ngIf="movie.runtime">
+            <h3>Runtime</h3>
+            <p>{{ movie.runtime }} min.</p>
+          </div>
+
+          <div class="info-item" *ngIf="movie.budget">
+            <h3>Budget</h3>
+            <p>${{ movie.budget | number }}</p>
+          </div>
+
+          <div class="info-item" *ngIf="movie.revenue">
+            <h3>Revenue</h3>
+            <p>${{ movie.revenue | number }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

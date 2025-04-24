@@ -1,0 +1,219 @@
+.carousel-container {
+  @apply opacity-0 invisible transition-all duration-500 min-h-[300px] relative overflow-hidden;
+}
+
+.carousel-initialized {
+  @apply opacity-100 visible;
+}
+
+.movie-carousel-container {
+  @apply py-10 relative flex flex-col gap-16;
+  
+  .wrapper {
+    @apply flex flex-col gap-4;
+  }
+
+  @media (max-width: 576px) {
+    @apply py-4 gap-8;
+  }
+}
+
+.title {
+  @apply text-2xl text-white m-0;
+}
+
+.movie-carousel {
+  @apply w-full;
+}
+
+.swiper-navigation {
+  @apply flex justify-between absolute top-1/2 w-full z-10 -translate-y-1/2 pointer-events-none;
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center cursor-pointer border-none outline-none transition-all duration-300 pointer-events-auto;
+
+    &:hover {
+      @apply bg-black/80;
+    }
+
+    span {
+      @apply text-lg font-bold;
+    }
+  }
+
+  .swiper-button-prev {
+    @apply ml-2.5;
+  }
+
+  .swiper-button-next {
+    @apply mr-2.5;
+  }
+}
+
+::ng-deep .swiper-pagination {
+  @apply bottom-0;
+}
+
+::ng-deep .swiper-pagination-bullet {
+  @apply w-2.5 h-2.5 bg-[#ccc] opacity-70;
+
+  &-active {
+    @apply bg-[#007bff] opacity-100;
+  }
+}
+
+.search-container {
+  @apply rounded-lg flex flex-col gap-4;
+}
+
+.search-form {
+  @apply flex;
+
+  .search-input {
+    @apply flex-1 py-3 px-4 text-base rounded-lg border border-white/[0.08] bg-[#090A0C] text-white;
+
+    &:focus {
+      @apply outline-none;
+    }
+    
+    &::placeholder {
+      @apply text-white/50;
+    }
+  }
+
+  .search-button {
+    @apply py-3 px-5 bg-[#e50914] text-white border-none rounded-r-md text-base font-bold cursor-pointer transition-colors duration-300;
+
+    &:hover {
+      @apply bg-[#f40612];
+    }
+  }
+}
+
+.loading, .error-message, .no-results {
+  @apply p-4 text-center text-white bg-white/10 rounded;
+
+  p {
+    @apply text-base;
+  }
+}
+
+.error-message {
+  @apply bg-[rgba(220,53,69,0.2)];
+}
+
+.loading, .no-results {
+  @apply bg-white/10;
+}
+
+.movie-grid {
+  @apply grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-5;
+
+  .movie-item {
+    @apply transition-transform duration-300;
+
+    &:hover {
+      @apply scale-105;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-title {
+    @apply text-xl;
+  }
+
+  .swiper-navigation {
+    .swiper-button-prev,
+    .swiper-button-next {
+      @apply w-9 h-9;
+    }
+  }
+
+  .search-form {
+    @apply flex-col;
+
+    .search-input {
+      @apply rounded mb-2.5;
+    }
+
+    .search-button {
+      @apply rounded;
+    }
+  }
+
+  .movie-grid {
+    @apply grid-cols-[repeat(auto-fill,minmax(150px,1fr))];
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-title {
+    @apply text-lg;
+  }
+
+  .swiper-navigation {
+    .swiper-button-prev,
+    .swiper-button-next {
+      @apply w-8 h-8;
+    }
+  }
+
+  .movie-grid {
+    @apply grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-4;
+  }
+}
+
+.load-more-slide {
+  @apply h-full;
+}
+
+.load-more-container {
+  @apply flex flex-col justify-center items-center w-full h-full bg-white/10 rounded-lg cursor-pointer transition-all duration-300 p-5 box-border min-h-[250px] aspect-[2/3];
+
+  &:hover {
+    @apply bg-white/20;
+  }
+}
+
+.load-more-content {
+  @apply flex flex-col items-center justify-center text-white gap-2.5;
+}
+
+.load-more-icon {
+  @apply text-3xl font-bold w-[60px] h-[60px] flex items-center justify-center rounded-full border-2 border-white;
+}
+
+.load-more-text {
+  @apply text-base text-center;
+}
+
+.loading-spinner {
+  @apply flex flex-col items-center text-white gap-2.5;
+
+  .spinner {
+    @apply w-10 h-10 border-2 border-white/30 rounded-full border-t-white animate-spin;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.load-more-container-external {
+  @apply flex flex-col justify-center items-center bg-white/10 rounded-lg cursor-pointer transition-all duration-300 p-4 my-5 mx-auto text-center w-full max-w-[200px];
+
+  &:hover {
+    @apply bg-white/20;
+  }
+
+  .load-more-content {
+    @apply flex flex-col items-center justify-center text-white gap-2.5;
+  }
+
+  .load-more-text {
+    @apply text-base text-center;
+  }
+}
